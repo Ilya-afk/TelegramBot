@@ -19,7 +19,7 @@ async def anime(message: types.Message):
     await message.answer('Твое имя')
 
 
-#@dp.message_handler()
+# @dp.message_handler()
 async def message_filter(message: types.Message):
     if {i.lower().translate(str.maketrans('', '', string.punctuation)) for i in message.text.split(' ')} \
             .intersection(set(json.load(open('black_list.json')))) != set():
@@ -28,6 +28,6 @@ async def message_filter(message: types.Message):
 
 
 def register_handlers_other(dp: Dispatcher):
-    dp.register_message_handler(beer, lambda message: 'пиво' in message.text)
+    dp.register_message_handler(beer, lambda message: 'пиво' in message.text.lower())
     dp.register_message_handler(anime, Text(equals='аниме', ignore_case=True))
     dp.register_message_handler(message_filter)
