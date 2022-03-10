@@ -19,7 +19,7 @@ async def comand_schedule(message: types.Message):
     await bot.send_message(message.from_user.id, 'Свежие мем каждый день в 10 утра', reply_markup=ReplyKeyboardRemove())
 
 
-#@dp.message_handler(commands=['adress'])
+# @dp.message_handler(commands=['adress'])
 async def comand_adress(message: types.Message):
     await bot.send_message(message.from_user.id, 'Всемирная паутина сети интернет')
 

@@ -8,5 +8,5 @@ with open('black_list.txt', encoding='utf-8') as r:
         if word != '':
             black_list.append(word)
 
-with open('black_list.json', 'w', encoding='utf-8') as e:
+with open('../black_list.json', 'w', encoding='utf-8') as e:
     json.dump(black_list, e, ensure_ascii=True)
