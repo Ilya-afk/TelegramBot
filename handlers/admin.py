@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import types, Dispatcher
 from aiogram.types import ReplyKeyboardRemove
 
-from create_bot import dp, bot
+from create_bot import bot
 from data_base.sqlite_db import sql_add_command
 from keyboards import kb_admin
 
