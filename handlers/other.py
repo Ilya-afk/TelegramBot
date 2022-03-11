@@ -1,10 +1,28 @@
 import json
 import string
+import hashlib
 
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters import Text
+from aiogram.types import InputTextMessageContent, InlineQueryResultArticle
 
 from create_bot import dp
+
+
+# @dp.inline_handler()
+async def inline_handler(query: types.InlineQuery):
+    text = query.query or 'echo'
+    link = 'https://ru.wikipedia.org/wiki/'+text
+    result_id: str = hashlib.md5(text.encode()).hexdigest()
+
+    articles = [types.InlineQueryResultArticle(
+        id=result_id,
+        title='Статья Wiki',
+        url=link,
+        input_message_content=types.InputTextMessageContent(
+            message_text=link))]
+
+    await query.answer(articles, cache_time=1, is_personal=True)
 
 
 # так можно избавиться от / и сделать более красиво
@@ -31,3 +49,4 @@ def register_handlers_other(dp: Dispatcher):
     dp.register_message_handler(beer, lambda message: 'пиво' in message.text.lower())
     dp.register_message_handler(anime, Text(equals='аниме', ignore_case=True))
     dp.register_message_handler(message_filter)
+    dp.register_inline_handler(inline_handler)
